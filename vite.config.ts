@@ -3,8 +3,7 @@ import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 
 export default defineConfig({
-  base: '/egfr-app/',
-
+  base: "/egfr-app/",
   plugins: [
     react(),
     VitePWA({
