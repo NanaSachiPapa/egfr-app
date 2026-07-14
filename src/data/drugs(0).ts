@@ -4,11 +4,9 @@ export const DRUG_DB = [
   { name:"リスペリドン", brand:"リスパダール錠・OD錠・細粒・内用液", category:"抗精神病薬(SDA)",
     normal:"1回1mg 1日2回より開始、維持量1日2〜6mg 分2、最大1日12mg",
     ranges:[
-      {ccr:[50,Infinity], dose:"活性代謝物パリペリドンが蓄積するため、1日1mg 分2より開始、維持量1日2〜6mg 分2、最大1日6mg"},
-      {ccr:[30,50], dose:"1日50〜75mg 分2〜3"},
-      {ccr:[10,30], dose:"1日25mg、最大50mg"},
-      {ccr:[0,10], dose:"1日25mg、最大50mg（半減期5.1倍）"}
-    ], hd:"1日25mg、HDはHD後。または50mgを週3回HD後", pd:"HDに準じる", dialyzable:"×", caution:true },
+      {ccr:[50,Infinity], dose:"1日1mg 分2より開始、維持量1日2〜6mg 分2、最大1日6mg"},
+      {ccr:[0,50], dose:"活性代謝物パリペリドンが蓄積 1日1mg 分2より開始、維持量１日2〜6mg 分2"},
+    ], hd:"活性代謝物パリペリドンが蓄積 1日1mg 分2より開始、維持量１日2〜6mg 分2", pd:"HDに準じる", dialyzable:"×", caution:true },
   { name:"スルピリド", brand:"ドグマチール錠・カプセル・細粒", category:"抗精神病薬(ベンザミド系)",
     normal:"①胃潰瘍：1日150mg 分3  ②統合失調症：1日300〜600mg  ③うつ：1日150〜300mg",
     ranges:[
@@ -223,73 +221,6 @@ export const DRUG_DB = [
       {ccr:[60,Infinity], dose:"通常用量"},
       {ccr:[30,60], dose:"1日1回2mg（AUCは健常者の2.2倍）"}
     ], hd:"禁忌（AUCは健常者の4.1倍）", pd:"禁忌", dialyzable:"△", danger:true, caution:true },
-  // 抗菌薬
-  { name:"バンコマイシン", brand:"塩酸バンコマイシン点滴静注用", category:"抗菌薬(グリコペプチド系/抗MRSA)",
-    normal:"1回0.5gを6時間毎または1回1gを12時間毎（60分以上かけて点滴）",
-    ranges:[
-      {ccr:[100,Infinity], dose:"初回負荷量（体重60kg）1.75g、維持1回1.25gを12時間毎"},
-      {ccr:[90,100], dose:"初回負荷量（体重60kg）1.75g、維持1回1.0gを12時間毎"},
-      {ccr:[80,90], dose:"初回負荷量（体重60kg）1.75g、維持1回1.0gを12時間毎"},
-      {ccr:[70,80], dose:"初回負荷量（体重60kg）1.75g、維持1回0.75gを12時間毎"},
-      {ccr:[60,70], dose:"初回負荷量（体重60kg）1.75g、維持1回0.75gを12時間毎"},
-      {ccr:[50,60], dose:"初回負荷量（体重60kg）1.75g、維持1回0.5gを12時間毎"},
-      {ccr:[40,50], dose:"初回負荷量（体重60kg）1.5g、維持1回0.5gを12時間毎"},
-      {ccr:[30,40], dose:"初回負荷量（体重60kg）1.5g、維持1回0.75gを24時間毎"},
-      {ccr:[20,30], dose:"腎障害発現率が高率のため代替薬考慮。使用時：初回15〜20mg/kg、以後1回7.5〜10mg/kgを24時間毎"},
-      {ccr:[10,20], dose:"腎障害発現率が高率のため代替薬考慮。使用時：初回15〜20mg/kg、以後1回7.5〜10mg/kgを48〜72時間毎"}
-    ], hd:"25〜30mg/kg（DW）を負荷投与、毎HD後7.5〜10mg/kg（DW）投与",
-    pd:"負荷量30mg/kg腹腔内、維持1.5mg/kg/バッグ腹腔内（間歇）", dialyzable:"△", caution:true,
-    note:"TDM必須。目標トラフ：非複雑性15〜30μg/mL、複雑性20〜40μg/mL" },
-  { name:"テイコプラニン", brand:"注射用タゴシッド", category:"抗菌薬(グリコペプチド系/抗MRSA)",
-    normal:"初日400〜800mg 分2、以後1日1回200〜400mgを30分以上かけて点滴",
-    ranges:[
-      {ccr:[60,Infinity], dose:"通常用量（TDMを実施）"},
-      {ccr:[30,60], dose:"目標トラフ15〜30μg/mL：1回6.7mg/kgを24時間毎（3日間負荷後）"},
-      {ccr:[0,30], dose:"目標トラフ15〜30μg/mL：1回6mgを48時間毎、HDはHD後"}
-    ], hd:"1回6mg/kgを48時間毎、HDはHD後  PD：1回4mg/kgを48時間毎",
-    pd:"負荷100mg/L、維持20mg/L", dialyzable:"×", caution:true,
-    note:"TDM必須。AUCは健常者の2〜3倍" },
-  { name:"レボフロキサシン（経口）", brand:"クラビット錠・細粒", category:"抗菌薬(ニューキノロン系)",
-    normal:"1日1回500mg",
-    ranges:[
-      {ccr:[50,Infinity], dose:"初日500mgを1回、以後1回250mgを24時間毎"},
-      {ccr:[20,50], dose:"初日500mgを1回、以後1回250mgを48時間毎または週3回HD後"}
-    ], hd:"初日500mgを1回、以後1回250mgを48時間毎またはHD後",
-    pd:"経口250mg/dayまたは500mgを48時間毎", dialyzable:"△", caution:true,
-    note:"腎機能低下患者では痙攣・低血糖・腱障害のリスクに留意" },
-  { name:"セフェピム", brand:"セフェピム塩酸塩静注用", category:"抗菌薬(第四世代セフェム系)",
-    normal:"①一般感染症：1日1〜2g 分2  ②発熱性好中球減少症：1日4g 分2",
-    ranges:[
-      {ccr:[60,Infinity], dose:"①1回0.5〜1gを12時間毎  ②1回1gを12時間毎"},
-      {ccr:[30,60], dose:"①1回0.5〜1gを24時間毎  ②1回2gを12〜24時間毎"},
-      {ccr:[11,30], dose:"①1回0.5gを24時間毎  ②1回0.5gを24時間毎"},
-      {ccr:[0,11], dose:"①1回0.25〜0.5gを24時間毎  ②1回0.5gを24時間毎（添）"}
-    ], hd:"①1回0.25〜0.5gを24時間毎、HDはHD後に投与。必要に応じて初回1g負荷投与",
-    pd:"腹腔内：負荷0.5g/L、維持0.125g/L", dialyzable:"○", caution:true,
-    note:"腎機能低下で減量しなかった場合、痙攣・意識障害などの精神・神経症状が現れやすい" },
-  { name:"イミペネム・シラスタチン", brand:"チエナム点滴静注用", category:"抗菌薬(カルバペネム系)",
-    normal:"1日0.5〜1.0gを分2〜3（30分以上かけて）、重症例は1日2gまで増量可",
-    ranges:[
-      {ccr:[70,Infinity], dose:"通常用量"},
-      {ccr:[41,70], dose:"1回0.25〜0.5gを8時間毎（菌のMICによってはより高用量も検討）"},
-      {ccr:[21,41], dose:"1回0.125〜0.25gを12時間毎（他剤選択が望ましい）"},
-      {ccr:[0,21], dose:"痙攣副作用リスクが高く他剤を優先。使用する場合は1回0.25gを24時間毎"}
-    ], hd:"1回0.25gを24時間毎、HDはHD後  PD：バッグ交換交互で500mg（腹腔内間歇）",
-    pd:"維持50mg/L（腹腔内連続）", dialyzable:"○", caution:true },
-  { name:"ゲンタマイシン", brand:"ゲンタシン注", category:"抗菌薬(アミノグリコシド系)",
-    normal:"1日3〜5mg/kgを分3〜4、筋注または30分〜2時間かけて点滴",
-    ranges:[
-      {ccr:[80,Infinity], dose:"重症(MIC=2)：7mg/kgを24時間毎、軽中等症(MIC≦1)：5mg/kgを24時間毎"},
-      {ccr:[70,80], dose:"重症：5mg/kgを24時間毎、軽中等症：4mg/kgを24時間毎"},
-      {ccr:[60,70], dose:"重症：5mg/kgを24時間毎、軽中等症：4mg/kgを24時間毎"},
-      {ccr:[50,60], dose:"重症：4mg/kgを24時間毎、軽中等症：3.5mg/kgを24時間毎"},
-      {ccr:[40,50], dose:"重症：4mg/kgを24時間毎、軽中等症：2.5mg/kgを24時間毎"},
-      {ccr:[30,40], dose:"重症：5mg/kgを48時間毎、軽中等症：2.5mg/kgを24時間毎"},
-      {ccr:[20,30], dose:"重症：4mg/kgを48時間毎、軽中等症：4mg/kgを48時間毎"},
-      {ccr:[10,20], dose:"重症：3mg/kgを48時間毎、軽中等症：3mg/kgを48時間毎"}
-    ], hd:"2mg/kg（軽中等症）または2.5〜3mg/kg（重症）を負荷投与、維持1.7mg/kgを毎HD後",
-    pd:"2mg/kg/day（CAPD、無尿）または2.5mg/kg（尿量あり）を1日1回静注", dialyzable:"○", caution:true,
-    note:"TDM必須。目標：ピーク（重症）15〜20μg/mL、トラフ<1μg/mL（軽中等症ピーク8〜10μg/mL）。高用量は5日以内" },
   // オピオイド
   { name:"モルヒネ塩酸塩（経口）", brand:"オプソ内服液・MSコンチン錠など", category:"オピオイド(麻薬)",
     normal:"経口：1日20〜120mg 分2〜4",
@@ -305,49 +236,6 @@ export const DRUG_DB = [
       {ccr:[30,Infinity], dose:"通常用量"},
       {ccr:[0,30], dose:"eGFR<30では慎重投与（トラマドール・M1のAUCはそれぞれ健常者の2.0、2.2倍）"}
     ], hd:"投与間隔を延長するなど慎重に投与", pd:"同左", dialyzable:"×", caution:true },
-  // 抗ヘルペス薬
-  { name:"バラシクロビル", brand:"バルトレックス錠・顆粒", category:"抗ウイルス薬(抗ヘルペス)",
-    normal:"①帯状疱疹：1回1,000mgを1日3回  ②単純疱疹：1回500mgを1日2回",
-    ranges:[
-      {ccr:[50,Infinity], dose:"①1回1,000mgを12時間毎  ②1回500mgを12時間毎"},
-      {ccr:[30,50], dose:"①1回1,000mgを24時間毎  ②1回500mgを24時間毎"},
-      {ccr:[10,30], dose:"①②1回500mgを24時間毎"}
-    ], hd:"①1回体重55kg以上800mg・40〜55kg600mg・40kg未満400mg、HDはHD後  ②③1回200mgを1日1〜2回",
-    pd:"同左", dialyzable:"○", caution:true,
-    note:"腎機能低下患者に減量しなかった場合、精神神経障害・意識障害の危険性が高い。安全面から他剤を優先" },
-  { name:"アシクロビル（注射）", brand:"ゾビラックス点滴静注用", category:"抗ウイルス薬(抗ヘルペス)",
-    normal:"1回5mg/kgを8時間毎に1時間以上かけて点滴（脳炎・髄膜炎は1回10mg/kgまで）",
-    ranges:[
-      {ccr:[50,Infinity], dose:"通常用量"},
-      {ccr:[25,50], dose:"1回5mg/kgを12時間毎"},
-      {ccr:[10,25], dose:"1回5mg/kgを24時間毎"},
-      {ccr:[0,10], dose:"1回2.5mg/kgを24時間毎"}
-    ], hd:"1回2.5mg/kgを24時間毎、HDはHD後", pd:"同左", dialyzable:"○", caution:true },
-  // 抗インフルエンザ薬
-  { name:"オセルタミビル", brand:"タミフルカプセル・ドライシロップ", category:"抗インフルエンザ薬",
-    normal:"治療：1回75mgを1日2回（5日間）  予防：1回75mgを1日1回（7〜10日間）",
-    ranges:[
-      {ccr:[30,Infinity], dose:"通常用量"},
-      {ccr:[10,30], dose:"治療：1日1回75mg（5日間）  予防：1回75mgを隔日（4〜5回）"}
-    ], hd:"治療：1回75mgを単回  予防：初回75mg、2回のHD後に75mg追加",
-    pd:"初回75mg、7日目に75mg追加", dialyzable:"○", caution:true },
-  // フルコナゾール
-  { name:"フルコナゾール（経口）", brand:"ジフルカンカプセル・ドライシロップ", category:"抗真菌薬(アゾール系)",
-    normal:"①カンジダ症：1日1回50〜100mg  ②クリプトコッカス症：1日1回50〜200mg  ③深在性真菌症予防：1日1回400mg",
-    ranges:[
-      {ccr:[50,Infinity], dose:"通常用量（維持量として1日400mgを目安）"},
-      {ccr:[0,50], dose:"①②③50%に減量"}
-    ], hd:"①②③HD終了後に通常用量", pd:"腹腔内間歇：150〜200mgを24〜48時間毎",
-    dialyzable:"○", caution:true },
-  // ST合剤
-  { name:"ST合剤（経口）", brand:"バクタ配合錠・バクトラミン配合錠など", category:"抗菌薬(ST合剤)",
-    normal:"①一般感染症：1日4錠（T換算320mg）分2  ②ニューモシスチス肺炎治療：1日9〜12錠 分3〜4",
-    ranges:[
-      {ccr:[30,Infinity], dose:"通常用量"},
-      {ccr:[15,30], dose:"①②通常の1/2量"}
-    ], hd:"②治療：1回3錠（T換算240mg）を1日2回  発症抑制：1回1錠を週3回、HDはHD後",
-    pd:"同左", dialyzable:"○", caution:true,
-    note:"トリメトプリムはクレアチニンの尿細管分泌を阻害→Scr上昇（偽性腎障害）の可能性あり。RAS阻害薬との併用で高K血症リスク増大" },
   // プレガバリン
   { name:"プレガバリン", brand:"リリカカプセル・OD錠", category:"神経障害性疼痛緩和薬",
     normal:"①神経障害性疼痛：初期1日150mg 分2→最大1日600mg  ②線維筋痛症：初期1日150mg→最大1日450mg",
@@ -445,7 +333,6 @@ export const DRUG_DB = [
     ],
     hd:"禁忌", pd:"禁忌", dialyzable:"○", danger:true, caution:true,
     note:"乳酸アシドーシスに注意" },
-
 // アムロジピン
   { name:"アムロジピン", brand:"ノルバスク錠・OD錠", category:"降圧薬(Ca拮抗薬)",
     normal:"1日1回2.5〜5mg、最大10mg",
@@ -453,7 +340,6 @@ export const DRUG_DB = [
       {ccr:[0,Infinity], dose:"通常用量"}
     ],
     hd:"通常用量", pd:"通常用量", dialyzable:"×" },
-
 // アトルバスタチン
   { name:"アトルバスタチン", brand:"リピトール錠", category:"脂質異常症治療薬",
     normal:"1日1回10mg、重症例20mgまで",
@@ -461,7 +347,6 @@ export const DRUG_DB = [
       {ccr:[0,Infinity], dose:"通常用量"}
     ],
     hd:"通常用量", pd:"通常用量", dialyzable:"×" },
-
 // エンパグリフロジン
   { name:"エンパグリフロジン", brand:"ジャディアンス錠", category:"糖尿病薬(SGLT2阻害薬)",
     normal:"1日1回10mg、必要に応じ25mg",
@@ -471,7 +356,6 @@ export const DRUG_DB = [
     ],
     hd:"推奨されない", pd:"推奨されない", dialyzable:"×", caution:true,
     note:"脱水・尿路感染症に注意" },
-
 // ダパグリフロジン
   { name:"ダパグリフロジン", brand:"フォシーガ錠", category:"糖尿病薬(SGLT2阻害薬)",
     normal:"1日1回5〜10mg",
@@ -480,7 +364,6 @@ export const DRUG_DB = [
       {ccr:[0,25], dose:"新規開始は推奨されない"}
     ],
     hd:"推奨されない", pd:"推奨されない", dialyzable:"×", caution:true },
-
 // リナグリプチン
   { name:"リナグリプチン", brand:"トラゼンタ錠", category:"糖尿病薬(DPP-4阻害薬)",
     normal:"1日1回5mg",
@@ -488,7 +371,6 @@ export const DRUG_DB = [
       {ccr:[0,Infinity], dose:"通常用量"}
     ],
     hd:"通常用量", pd:"通常用量", dialyzable:"×" },
-
 // テルミサルタン
   { name:"テルミサルタン", brand:"ミカルディス錠", category:"降圧薬(ARB)",
     normal:"1日1回20〜80mg",
@@ -497,7 +379,6 @@ export const DRUG_DB = [
     ],
     hd:"通常用量", pd:"通常用量", dialyzable:"×",
     caution:true, note:"高カリウム血症に注意" },
-
 // ロサルタン
   { name:"ロサルタン", brand:"ニューロタン錠", category:"降圧薬(ARB)",
     normal:"1日1回25〜100mg",
@@ -506,7 +387,6 @@ export const DRUG_DB = [
     ],
     hd:"通常用量", pd:"通常用量", dialyzable:"×",
     caution:true, note:"高カリウム血症に注意" },
-
 // フロセミド
   { name:"フロセミド", brand:"ラシックス錠", category:"利尿薬(ループ利尿薬)",
     normal:"1日20〜80mg",
@@ -514,7 +394,6 @@ export const DRUG_DB = [
       {ccr:[0,Infinity], dose:"通常用量（腎機能低下時は増量が必要なことあり）"}
     ],
     hd:"残腎機能があれば使用可", pd:"使用可", dialyzable:"×" },
-
 // ロスバスタチン
   { name:"ロスバスタチン", brand:"クレストール錠", category:"脂質異常症治療薬",
     normal:"1日1回2.5〜10mg",
@@ -524,7 +403,6 @@ export const DRUG_DB = [
     ],
     hd:"少量より開始", pd:"少量より開始", dialyzable:"×",
     caution:true },
-
 // クロピドグレル
   { name:"クロピドグレル", brand:"プラビックス錠", category:"抗血小板薬",
     normal:"1日1回75mg",
@@ -532,7 +410,6 @@ export const DRUG_DB = [
       {ccr:[0,Infinity], dose:"通常用量"}
     ],
     hd:"通常用量", pd:"通常用量", dialyzable:"×" },
-
 // ファモチジン
   { name:"ファモチジン", brand:"ガスター錠", category:"消化性潰瘍治療薬(H2RA)",
     normal:"1日2回20mg",
@@ -543,7 +420,6 @@ export const DRUG_DB = [
     ],
     hd:"HD後投与", pd:"減量して使用", dialyzable:"○",
     caution:true },
-
 // フェブキソスタット
   { name:"フェブキソスタット", brand:"フェブリク錠", category:"高尿酸血症治療薬",
     normal:"1日1回10mgより開始、維持20〜60mg",
@@ -551,7 +427,6 @@ export const DRUG_DB = [
       {ccr:[0,Infinity], dose:"通常用量"}
     ],
     hd:"通常は10〜20mg", pd:"少量より開始", dialyzable:"×" },
-
 // ピタバスタチン
 { name:"ピタバスタチン", brand:"リバロ錠", category:"脂質異常症治療薬",
 normal:"1日1回1〜2mg、最大4mg",
@@ -616,7 +491,6 @@ ranges:[
 {ccr:[0,Infinity], dose:"通常用量"}
 ],
 hd:"通常用量", pd:"通常用量", dialyzable:"×" },
-
 // エナラプリル
 { name:"エナラプリル", brand:"レニベース錠", category:"降圧薬(ACE阻害薬)",
 normal:"1日1回5〜10mg",
@@ -701,4 +575,740 @@ ranges:[
 ],
 hd:"通常用量", pd:"通常用量", dialyzable:"×",
 note:"便秘・腸管障害に注意" },
+// カンデサルタン
+{ name:"カンデサルタン", brand:"ブロプレス錠", category:"降圧薬(ARB)",
+normal:"1日1回4〜8mg",
+ranges:[
+{ccr:[0,Infinity], dose:"通常用量"}
+],
+hd:"慎重投与", pd:"慎重投与", dialyzable:"×",
+caution:true, note:"高K血症に注意" },
+// オルメサルタン
+{ name:"オルメサルタン", brand:"オルメテック錠", category:"降圧薬(ARB)",
+normal:"1日1回10〜20mg",
+ranges:[
+{ccr:[0,Infinity], dose:"通常用量"}
+],
+hd:"慎重投与", pd:"慎重投与", dialyzable:"×",
+caution:true, note:"高K血症に注意" },
+// アジルサルタン
+{ name:"アジルサルタン", brand:"アジルバ錠", category:"降圧薬(ARB)",
+normal:"1日1回20mg",
+ranges:[
+{ccr:[0,Infinity], dose:"通常用量"}
+],
+hd:"慎重投与", pd:"慎重投与", dialyzable:"×",
+caution:true },
+// ニフェジピンCR
+{ name:"ニフェジピンCR", brand:"アダラートCR錠", category:"降圧薬(Ca拮抗薬)",
+normal:"1日1回20〜40mg",
+ranges:[
+{ccr:[0,Infinity], dose:"通常用量"}
+],
+hd:"通常用量", pd:"通常用量", dialyzable:"×" },
+// ドキサゾシン
+{ name:"ドキサゾシン", brand:"カルデナリン錠", category:"降圧薬(α1遮断薬)",
+normal:"1日1回1mgより開始",
+ranges:[
+{ccr:[0,Infinity], dose:"通常用量"}
+],
+hd:"通常用量", pd:"通常用量", dialyzable:"×",
+caution:true, note:"起立性低血圧に注意" },
+// ジゴキシン
+{ name:"ジゴキシン", brand:"ジゴシン錠", category:"強心薬",
+normal:"1日0.125〜0.25mg",
+ranges:[
+{ccr:[50,Infinity], dose:"通常用量"},
+{ccr:[30,50], dose:"0.125mg/日"},
+{ccr:[0,30], dose:"0.125mg隔日"}
+],
+hd:"原則避ける", pd:"慎重投与", dialyzable:"×",
+danger:true, caution:true,
+note:"中毒域に入りやすい" },
+// サクビトリル･バルサルタン
+{ name:"サクビトリル・バルサルタン", brand:"エンレスト錠", category:"心不全治療薬(ARNI)",
+normal:"1日2回100〜400mg",
+ranges:[
+{ccr:[30,Infinity], dose:"通常用量"},
+{ccr:[0,30], dose:"少量より開始"}
+],
+hd:"慎重投与", pd:"慎重投与", dialyzable:"×",
+caution:true,
+note:"高K血症・腎機能悪化に注意" },
+// フィネレノン
+{ name:"フィネレノン", brand:"ケレンディア錠", category:"MRA",
+normal:"1日1回10〜20mg",
+ranges:[
+{ccr:[25,Infinity], dose:"通常用量"},
+{ccr:[0,25], dose:"開始は推奨されない"}
+],
+hd:"禁忌", pd:"禁忌", dialyzable:"×",
+danger:true, caution:true,
+note:"高K血症に注意" },
+// ミラベグロン
+{ name:"ミラベグロン", brand:"ベタニス錠", category:"過活動膀胱治療薬",
+normal:"1日1回50mg",
+ranges:[
+{ccr:[30,Infinity], dose:"通常用量"},
+{ccr:[15,30], dose:"1日1回25mg"},
+{ccr:[0,15], dose:"慎重投与"}
+],
+hd:"慎重投与", pd:"慎重投与", dialyzable:"×",
+caution:true },
+// ビベグロン
+{ name:"ビベグロン", brand:"ベオーバ錠", category:"過活動膀胱治療薬",
+normal:"1日1回50mg",
+ranges:[
+{ccr:[0,Infinity], dose:"通常用量"}
+],
+hd:"通常用量", pd:"通常用量", dialyzable:"×" },
+// ソリフェナシン
+{ name:"ソリフェナシン", brand:"ベシケア錠", category:"過活動膀胱治療薬",
+normal:"1日1回5mg",
+ranges:[
+{ccr:[30,Infinity], dose:"通常用量"},
+{ccr:[0,30], dose:"最大5mg/日"}
+],
+hd:"慎重投与", pd:"慎重投与", dialyzable:"×",
+caution:true },
+// フェソテロジン
+{ name:"フェソテロジン", brand:"トビエース錠", category:"過活動膀胱治療薬",
+normal:"1日1回4mg",
+ranges:[
+{ccr:[30,Infinity], dose:"通常用量"},
+{ccr:[0,30], dose:"4mgまで"}
+],
+hd:"慎重投与", pd:"慎重投与", dialyzable:"×",
+caution:true },
+// ラベプラゾール
+{ name:"ラベプラゾール", brand:"パリエット錠", category:"PPI",
+normal:"1日1回10〜20mg",
+ranges:[
+{ccr:[0,Infinity], dose:"通常用量"}
+],
+hd:"通常用量", pd:"通常用量", dialyzable:"×" },
+// エソメプラゾール
+{ name:"エソメプラゾール", brand:"ネキシウムカプセル", category:"PPI",
+normal:"1日1回10〜20mg",
+ranges:[
+{ccr:[0,Infinity], dose:"通常用量"}
+],
+hd:"通常用量", pd:"通常用量", dialyzable:"×" },
+// エサキセレノン
+{ name:"エサキセレノン", brand:"ミネブロ錠", category:"MRA",
+normal:"1日1回1.25〜5mg",
+ranges:[
+{ccr:[30,Infinity], dose:"通常用量"},
+{ccr:[0,30], dose:"慎重投与"}
+],
+hd:"慎重投与", pd:"慎重投与", dialyzable:"×",
+caution:true,
+note:"高K血症に注意" },
+// クエン酸第二鉄水和物
+{ name:"クエン酸第二鉄水和物", brand:"リオナ錠", category:"リン吸着薬",
+normal:"1日750mgより開始",
+ranges:[
+{ccr:[0,Infinity], dose:"通常用量"}
+],
+hd:"通常用量", pd:"通常用量", dialyzable:"×" },
+// スクロオキシ水酸化鉄
+{ name:"スクロオキシ水酸化鉄", brand:"ピートルチュアブル錠", category:"リン吸着薬",
+normal:"1日750mgより開始",
+ranges:[
+{ccr:[0,Infinity], dose:"通常用量"}
+],
+hd:"通常用量", pd:"通常用量", dialyzable:"×" },
+// ナルフラフィン
+{ name:"ナルフラフィン", brand:"レミッチカプセル", category:"透析そう痒症治療薬",
+normal:"1日1回2.5〜5μg",
+ranges:[
+{ccr:[0,Infinity], dose:"通常用量"}
+],
+hd:"通常用量", pd:"通常用量", dialyzable:"×" },
+// ネスプ
+{ name:"ダルベポエチンα", brand:"ネスプ注射液", category:"ESA",
+normal:"週1回投与",
+ranges:[
+{ccr:[0,Infinity], dose:"通常用量"}
+],
+hd:"通常用量", pd:"通常用量", dialyzable:"×" },
+// ミルセラ
+{ name:"エポエチンベータペゴル", brand:"ミルセラ注", category:"ESA",
+normal:"2〜4週毎投与",
+ranges:[
+{ccr:[0,Infinity], dose:"通常用量"}
+],
+hd:"通常用量", pd:"通常用量", dialyzable:"×" },
+// エベレンゾ
+{ name:"ロキサデュスタット", brand:"エベレンゾ錠", category:"HIF-PH阻害薬",
+normal:"週3回投与",
+ranges:[
+{ccr:[0,Infinity], dose:"通常用量"}
+],
+hd:"通常用量", pd:"通常用量", dialyzable:"×",
+caution:true,
+note:"Hb上昇速度に注意" },
+// ダーブロック
+{ name:"ダプロデュスタット", brand:"ダーブロック錠", category:"HIF-PH阻害薬",
+normal:"1日1回",
+ranges:[
+{ccr:[0,Infinity], dose:"通常用量"}
+],
+hd:"通常用量", pd:"通常用量", dialyzable:"×",
+caution:true,
+note:"Hb上昇速度に注意" },
+// コルスバ
+{ name:"ジフェリケファリン", brand:"コルスバ静注", category:"透析そう痒症治療薬",
+normal:"透析終了時投与",
+ranges:[
+{ccr:[0,Infinity], dose:"通常用量"}
+],
+hd:"通常用量", pd:"適応あり", dialyzable:"×",
+caution:true,
+note:"傾眠・めまいに注意" },
+// テイコプラニン
+{ name:"テイコプラニン", brand:"タゴシッド注", category:"抗MRSA薬",
+normal:"初回400mg×2回、その後200〜400mg/日",
+ranges:[
+{ccr:[60,Infinity], dose:"通常用量"},
+{ccr:[30,60], dose:"投与間隔延長"},
+{ccr:[0,30], dose:"TDMで調整"}
+],
+hd:"TDMで調整", pd:"TDMで調整", dialyzable:"△",
+danger:true, caution:true,
+note:"TDM推奨" },
+// ダプトマイシン
+{ name:"ダプトマイシン", brand:"キュビシン注", category:"抗MRSA薬",
+normal:"4〜6mg/kgを1日1回",
+ranges:[
+{ccr:[30,Infinity], dose:"通常用量"},
+{ccr:[0,30], dose:"48時間毎"}
+],
+hd:"透析後投与", pd:"慎重投与", dialyzable:"△",
+caution:true,
+note:"CPK上昇に注意" },
+// セフタジジム
+{ name:"セフタジジム", brand:"モダシン静注", category:"抗菌薬(セフェム系)",
+normal:"1回1〜2gを8〜12時間毎",
+ranges:[
+{ccr:[50,Infinity], dose:"通常用量"},
+{ccr:[30,50], dose:"1gを12時間毎"},
+{ccr:[0,30], dose:"減量"}
+],
+hd:"HD後投与", pd:"減量", dialyzable:"○",
+caution:true,
+note:"腎機能低下時は中枢神経症状に注意" },
+// セフメタゾール
+{ name:"セフメタゾール", brand:"セフメタゾン静注", category:"抗菌薬(セフェム系)",
+normal:"1〜2gを12時間毎",
+ranges:[
+{ccr:[50,Infinity], dose:"通常用量"},
+{ccr:[10,50], dose:"1gを24時間毎"},
+{ccr:[0,10], dose:"0.5〜1gを24時間毎"}
+],
+hd:"HD後投与", pd:"減量", dialyzable:"○",
+caution:true,
+note:"腎機能に応じ減量" },
+// セフォタキシム
+{ name:"セフォタキシム", brand:"クラフォラン注", category:"抗菌薬(セフェム系)",
+normal:"1〜2gを8〜12時間毎",
+ranges:[
+{ccr:[50,Infinity], dose:"通常用量"},
+{ccr:[10,50], dose:"減量"},
+{ccr:[0,10], dose:"さらに減量"}
+],
+hd:"HD後投与", pd:"減量", dialyzable:"○",
+caution:true,
+note:"腎機能に応じ減量" },
+// イミペネム・シラスタチン
+{ name:"イミペネム・シラスタチン", brand:"チエナム点滴静注", category:"抗菌薬(カルバペネム系)",
+normal:"0.5〜1gを6〜8時間毎",
+ranges:[
+{ccr:[70,Infinity], dose:"通常用量"},
+{ccr:[20,70], dose:"減量"},
+{ccr:[0,20], dose:"大幅減量"}
+],
+hd:"HD後投与", pd:"慎重投与", dialyzable:"○",
+danger:true, caution:true,
+note:"痙攣に注意" },
+// セファゾリン
+{ name:"セファゾリン", brand:"セファメジンα注", category:"抗菌薬(セフェム系)",
+normal:"1日1〜2g",
+ranges:[
+{ccr:[50,Infinity], dose:"通常用量"},
+{ccr:[10,50], dose:"0.5〜1gを12〜24時間毎"},
+{ccr:[0,10], dose:"0.25〜0.5gを24時間毎"}
+],
+hd:"HD後0.5〜1g", pd:"減量", dialyzable:"○",
+caution:true },
+// セフトリアキソン
+{ name:"セフトリアキソン", brand:"ロセフィン注", category:"抗菌薬(セフェム系)",
+normal:"1日1〜2g",
+ranges:[
+{ccr:[0,Infinity], dose:"通常用量"}
+],
+hd:"通常用量", pd:"通常用量", dialyzable:"×" },
+// タゾバクタム・ピペラシリン
+{ name:"タゾバクタム・ピペラシリン", brand:"ゾシン静注", category:"抗菌薬(ペニシリン系)",
+normal:"4.5gを6〜8時間毎",
+ranges:[
+{ccr:[40,Infinity], dose:"通常用量"},
+{ccr:[20,40], dose:"4.5gを8時間毎"},
+{ccr:[0,20], dose:"2.25gを8〜12時間毎"}
+],
+hd:"HD後追加投与", pd:"減量", dialyzable:"○",
+caution:true },
+// セフェピム
+{ name:"セフェピム", brand:"マキシピーム注", category:"抗菌薬(セフェム系)",
+normal:"1回1〜2gを12時間毎",
+ranges:[
+{ccr:[60,Infinity], dose:"通常用量"},
+{ccr:[30,60], dose:"1回1〜2gを24時間毎"},
+{ccr:[0,30], dose:"減量"}
+],
+hd:"HD後投与", pd:"減量", dialyzable:"○",
+caution:true,
+note:"腎機能低下時は意識障害に注意" },
+// セフジニル
+{ name:"セフジニル", brand:"セフゾンカプセル", category:"抗菌薬(セフェム系)",
+normal:"100mgを1日3回",
+ranges:[
+{ccr:[30,Infinity], dose:"通常用量"},
+{ccr:[0,30], dose:"100mgを1日1〜2回"}
+],
+hd:"HD後投与", pd:"慎重投与", dialyzable:"○",
+caution:true,
+note:"腎機能に応じ減量" },
+// セフポドキシム プロキセチル
+{ name:"セフポドキシム プロキセチル", brand:"バナン錠", category:"抗菌薬(セフェム系)",
+normal:"100〜200mgを1日2回",
+ranges:[
+{ccr:[30,Infinity], dose:"通常用量"},
+{ccr:[0,30], dose:"1日1回"}
+],
+hd:"HD後投与", pd:"慎重投与", dialyzable:"○",
+caution:true,
+note:"腎機能に応じ減量" },
+// セフカペン ピボキシル
+{ name:"セフカペン ピボキシル", brand:"フロモックス錠", category:"抗菌薬(セフェム系)",
+normal:"100mgを1日3回",
+ranges:[
+{ccr:[50,Infinity], dose:"通常用量"},
+{ccr:[0,50], dose:"減量"}
+],
+hd:"慎重投与", pd:"慎重投与", dialyzable:"△",
+caution:true,
+note:"腎機能に応じ減量" },
+// メロペネム
+{ name:"メロペネム", brand:"メロペン注", category:"抗菌薬(カルバペネム系)",
+normal:"0.5〜1gを8時間毎",
+ranges:[
+{ccr:[50,Infinity], dose:"通常用量"},
+{ccr:[10,50], dose:"0.5〜1gを12時間毎"},
+{ccr:[0,10], dose:"0.5gを24時間毎"}
+],
+hd:"HD後投与", pd:"減量", dialyzable:"○",
+caution:true },
+// エルタペネム
+{ name:"エルタペネム", brand:"インバンツ点滴静注", category:"抗菌薬(カルバペネム系)",
+normal:"1gを1日1回",
+ranges:[
+{ccr:[30,Infinity], dose:"通常用量"},
+{ccr:[0,30], dose:"500mgを1日1回"}
+],
+hd:"HD後投与", pd:"慎重投与", dialyzable:"○",
+caution:true,
+note:"腎機能に応じ減量" },
+// バンコマイシン
+{ name:"バンコマイシン", brand:"塩酸バンコマイシン点滴静注", category:"抗MRSA薬",
+    normal:"1回0.5gを6時間毎または1回1gを12時間毎（60分以上かけて点滴）",
+    ranges:[
+      {ccr:[100,Infinity], dose:"初回負荷量（体重60kg）1.75g、維持1回1.25gを12時間毎"},
+      {ccr:[90,100], dose:"初回負荷量（体重60kg）1.75g、維持1回1.0gを12時間毎"},
+      {ccr:[80,90], dose:"初回負荷量（体重60kg）1.75g、維持1回1.0gを12時間毎"},
+      {ccr:[70,80], dose:"初回負荷量（体重60kg）1.75g、維持1回0.75gを12時間毎"},
+      {ccr:[60,70], dose:"初回負荷量（体重60kg）1.75g、維持1回0.75gを12時間毎"},
+      {ccr:[50,60], dose:"初回負荷量（体重60kg）1.75g、維持1回0.5gを12時間毎"},
+      {ccr:[40,50], dose:"初回負荷量（体重60kg）1.5g、維持1回0.5gを12時間毎"},
+      {ccr:[30,40], dose:"初回負荷量（体重60kg）1.5g、維持1回0.75gを24時間毎"},
+      {ccr:[20,30], dose:"腎障害発現率が高率のため代替薬考慮。使用時：初回15〜20mg/kg、以後1回7.5〜10mg/kgを24時間毎"},
+      {ccr:[10,20], dose:"腎障害発現率が高率のため代替薬考慮。使用時：初回15〜20mg/kg、以後1回7.5〜10mg/kgを48〜72時間毎"}
+    ], hd:"25〜30mg/kg（DW）を負荷投与、毎HD後7.5〜10mg/kg（DW）投与",
+    pd:"負荷量30mg/kg腹腔内、維持1.5mg/kg/バッグ腹腔内（間歇）", dialyzable:"△", caution:true,
+    note:"TDM必須。目標トラフ：非複雑性15〜30μg/mL、複雑性20〜40μg/mL" },
+// リネゾリド
+{ name:"リネゾリド", brand:"ザイボックス錠", category:"抗MRSA薬",
+normal:"600mgを12時間毎",
+ranges:[
+{ccr:[0,Infinity], dose:"通常用量"}
+],
+hd:"通常用量", pd:"通常用量", dialyzable:"×",
+caution:true,
+note:"血小板減少に注意" },
+// シプロフロキサシン
+{ name:"シプロフロキサシン", brand:"シプロキサン錠", category:"抗菌薬(ニューキノロン)",
+normal:"1日400〜600mg",
+ranges:[
+{ccr:[50,Infinity], dose:"通常用量"},
+{ccr:[30,50], dose:"減量"},
+{ccr:[0,30], dose:"さらに減量"}
+],
+hd:"HD後投与", pd:"減量", dialyzable:"○",
+caution:true },
+// レボフロキサシン
+{ name:"レボフロキサシン", brand:"クラビット錠", category:"抗菌薬(ニューキノロン)",
+normal:"1日1回500mg",
+ranges:[
+{ccr:[50,Infinity], dose:"通常用量"},
+{ccr:[20,50], dose:"初回500mg、その後250mg/日"},
+{ccr:[0,20], dose:"初回500mg、その後250mgを48時間毎"}
+],
+hd:"初回500mg、その後250mgを透析後", pd:"慎重投与", dialyzable:"△",
+danger:true, caution:true,
+note:"腱障害・中枢神経症状・QT延長に注意" },
+// モキシフロキサシン
+{ name:"モキシフロキサシン", brand:"アベロックス錠", category:"抗菌薬(ニューキノロン)",
+normal:"400mgを1日1回",
+ranges:[
+{ccr:[0,Infinity], dose:"通常用量"}
+],
+hd:"通常用量", pd:"通常用量", dialyzable:"×",
+caution:true,
+note:"QT延長に注意" },
+// ガレノキサシン
+{ name:"ガレノキサシン", brand:"ジェニナック錠", category:"抗菌薬(ニューキノロン)",
+normal:"400mgを1日1回",
+ranges:[
+{ccr:[0,Infinity], dose:"通常用量"}
+],
+hd:"通常用量", pd:"通常用量", dialyzable:"×",
+caution:true,
+note:"QT延長に注意" },
+// シタフロキサシン
+{ name:"シタフロキサシン", brand:"グレースビット錠", category:"抗菌薬(ニューキノロン)",
+normal:"50〜100mgを1日2回",
+ranges:[
+{ccr:[50,Infinity], dose:"通常用量"},
+{ccr:[30,50], dose:"減量"},
+{ccr:[0,30], dose:"さらに減量"}
+],
+hd:"慎重投与", pd:"慎重投与", dialyzable:"△",
+caution:true,
+note:"QT延長・腱障害に注意" },
+// アモキシシリン
+{ name:"アモキシシリン", brand:"サワシリンカプセル", category:"抗菌薬(ペニシリン系)",
+normal:"250〜500mgを8時間毎",
+ranges:[
+{ccr:[30,Infinity], dose:"通常用量"},
+{ccr:[10,30], dose:"12時間毎"},
+{ccr:[0,10], dose:"24時間毎"}
+],
+hd:"透析後投与", pd:"減量", dialyzable:"○" },
+// アモキシシリン・クラブラン酸
+{ name:"アモキシシリン・クラブラン酸", brand:"オーグメンチン配合錠", category:"抗菌薬(ペニシリン系)",
+normal:"1回1錠を12時間毎",
+ranges:[
+{ccr:[30,Infinity], dose:"通常用量"},
+{ccr:[10,30], dose:"1日1回"},
+{ccr:[0,10], dose:"慎重投与"}
+],
+hd:"透析後追加", pd:"慎重投与", dialyzable:"○",
+caution:true,
+note:"クラブラン酸蓄積に注意" },
+// アンピシリン
+{ name:"アンピシリン", brand:"ビクシリン注", category:"抗菌薬(ペニシリン系)",
+normal:"1〜2gを6時間毎",
+ranges:[
+{ccr:[50,Infinity], dose:"通常用量"},
+{ccr:[10,50], dose:"8〜12時間毎"},
+{ccr:[0,10], dose:"12〜24時間毎"}
+],
+hd:"透析後投与", pd:"減量", dialyzable:"○" },
+// アンピシリン・スルバクタム
+{ name:"アンピシリン・スルバクタム", brand:"ユナシン-S静注", category:"抗菌薬(ペニシリン系)",
+normal:"1.5〜3gを6時間毎",
+ranges:[
+{ccr:[30,Infinity], dose:"通常用量"},
+{ccr:[15,30], dose:"12時間毎"},
+{ccr:[0,15], dose:"24時間毎"}
+],
+hd:"透析後投与", pd:"減量", dialyzable:"○" },
+// エリスロマイシン
+{ name:"エリスロマイシン", brand:"エリスロシン錠", category:"抗菌薬(マクロライド系)",
+normal:"200〜400mgを1日4回",
+ranges:[
+{ccr:[0,Infinity], dose:"通常用量"}
+],
+hd:"通常用量", pd:"通常用量", dialyzable:"×",
+caution:true,
+note:"QT延長・薬物相互作用に注意" },
+// クラリスロマイシン
+{ name:"クラリスロマイシン", brand:"クラリス錠", category:"抗菌薬(マクロライド系)",
+normal:"1回200mgを1日2回",
+ranges:[
+{ccr:[30,Infinity], dose:"通常用量"},
+{ccr:[0,30], dose:"1日1回200mg"}
+],
+hd:"慎重投与", pd:"慎重投与", dialyzable:"×",
+caution:true,
+note:"CYP3A4阻害作用に注意" },
+// アジスロマイシン
+{ name:"アジスロマイシン", brand:"ジスロマック錠", category:"抗菌薬(マクロライド系)",
+normal:"500mg 1日1回",
+ranges:[
+{ccr:[0,Infinity], dose:"通常用量"}
+],
+hd:"通常用量", pd:"通常用量", dialyzable:"×",
+caution:true,
+note:"QT延長に注意" },
+// ミノサイクリン
+{ name:"ミノサイクリン", brand:"ミノマイシン錠", category:"抗菌薬(テトラサイクリン系)",
+normal:"初回200mg、その後100mgを12時間毎",
+ranges:[
+{ccr:[0,Infinity], dose:"通常用量"}
+],
+hd:"通常用量", pd:"通常用量", dialyzable:"×",
+caution:true,
+note:"肝機能障害・めまいに注意" },
+// ドキシサイクリン
+{ name:"ドキシサイクリン", brand:"ビブラマイシン錠", category:"抗菌薬(テトラサイクリン系)",
+normal:"初回200mg、その後100mgを1〜2回/日",
+ranges:[
+{ccr:[0,Infinity], dose:"通常用量"}
+],
+hd:"通常用量", pd:"通常用量", dialyzable:"×",
+caution:true,
+note:"腎機能による減量不要" },
+// ST合剤（スルファメトキサゾール・トリメトプリム）
+{ name:"ST合剤（スルファメトキサゾール・トリメトプリム)",
+brand:"バクタ配合錠",
+category:"抗菌薬(ST合剤)",
+normal:"通常1〜2錠/日",
+ranges:[
+{ccr:[30,Infinity], dose:"通常用量"},
+{ccr:[15,30], dose:"50%減量"},
+{ccr:[0,15], dose:"原則避ける（必要時は慎重投与）"}
+],
+hd:"透析後投与", pd:"慎重投与", dialyzable:"○",
+danger:true,
+caution:true,
+note:"高K血症・骨髄抑制・Cr上昇に注意" },
+// メトロニダゾール
+{ name:"メトロニダゾール", brand:"フラジール錠", category:"抗菌薬(その他)",
+normal:"250〜500mgを1日3回",
+ranges:[
+{ccr:[0,Infinity], dose:"通常用量"}
+],
+hd:"通常用量", pd:"通常用量", dialyzable:"△",
+caution:true,
+note:"長期投与では末梢神経障害に注意" },
+// ホスホマイシン
+{ name:"ホスホマイシン", brand:"ホスミシン注", category:"抗菌薬(その他)",
+normal:"1日2〜4gを分2 1〜2時間かけて点滴静注",
+ranges:[
+{ccr:[30,Infinity], dose:"通常用量"},
+{ccr:[15,30], dose:"1日1〜3gを分1〜3"},
+{ccr:[0,15], dose:"1日1〜2gを分1〜2"}
+],
+hd:"HD後投与", pd:"慎重投与", dialyzable:"○",
+caution:true,
+note:"腎機能に応じ減量" },
+// コリスチメタートナトリウム
+{ name:"コリスチメタートナトリウム", brand:"オルドレブ点滴静注", category:"抗菌薬(その他)",
+normal:"体重・腎機能で調節",
+ranges:[
+{ccr:[50,Infinity], dose:"通常用量"},
+{ccr:[0,50], dose:"減量"}
+],
+hd:"HD後投与", pd:"慎重投与", dialyzable:"○",
+danger:true, caution:true,
+note:"腎毒性・神経毒性に注意" },
+// フルコナゾール
+{ name:"フルコナゾール（経口）", brand:"ジフルカンカプセル・ドライシロップ", category:"抗真菌薬",
+  normal:"①カンジダ症：1日1回50〜100mg  ②クリプトコッカス症：1日1回50〜200mg  ③深在性真菌症予防：1日1回400mg",
+  ranges:[
+    {ccr:[50,Infinity], dose:"通常用量（維持量として1日400mgを目安）"},
+    {ccr:[0,50], dose:"①②③50%に減量"}
+  ], hd:"①②③HD終了後に通常用量", pd:"腹腔内間歇：150〜200mgを24〜48時間毎",
+  dialyzable:"○", caution:true },
+// ホスフルコナゾール
+{ name:"ホスフルコナゾール", brand:"プロジフ静注", category:"抗真菌薬",
+normal:"フルコナゾール換算で投与",
+ranges:[
+{ccr:[50,Infinity], dose:"通常用量"},
+{ccr:[0,50], dose:"減量"}
+],
+hd:"HD後投与", pd:"減量", dialyzable:"○",
+caution:true,
+note:"フルコナゾールと同様" },
+// ミカファンギン
+{ name:"ミカファンギン", brand:"ファンガード点滴静注", category:"抗真菌薬",
+normal:"50〜150mgを1日1回",
+ranges:[
+{ccr:[0,Infinity], dose:"通常用量"}
+],
+hd:"通常用量", pd:"通常用量", dialyzable:"×",
+caution:true,
+note:"肝障害に注意" },
+// ボリコナゾール
+{ name:"ボリコナゾール", brand:"ブイフェンド錠", category:"抗真菌薬",
+normal:"初日負荷後200mgを1日2回",
+ranges:[
+{ccr:[0,Infinity], dose:"内服は通常用量"}
+],
+hd:"通常用量", pd:"通常用量", dialyzable:"×",
+caution:true,
+note:"点滴製剤はCrCl50mL/min未満では避ける" },
+// イトラコナゾール
+{ name:"イトラコナゾール", brand:"イトリゾールカプセル", category:"抗真菌薬",
+normal:"100〜200mgを1日1〜2回",
+ranges:[
+{ccr:[0,Infinity], dose:"通常用量"}
+],
+hd:"通常用量", pd:"通常用量", dialyzable:"×",
+caution:true,
+note:"CYP3A4阻害作用に注意" },
+// カスポファンギン
+{ name:"カスポファンギン", brand:"キャンディン点滴静注", category:"抗真菌薬",
+normal:"初日70mg、その後50mgを1日1回",
+ranges:[
+{ccr:[0,Infinity], dose:"通常用量"}
+],
+hd:"通常用量", pd:"通常用量", dialyzable:"×",
+caution:true,
+note:"肝機能障害では減量を考慮" },
+// リポソームアムホテリシンB
+{ name:"リポソームアムホテリシンB", brand:"アムビゾーム点滴静注", category:"抗真菌薬",
+normal:"2.5〜5mg/kgを1日1回",
+ranges:[
+{ccr:[0,Infinity], dose:"通常用量"}
+],
+hd:"通常用量", pd:"通常用量", dialyzable:"×",
+danger:true, caution:true,
+note:"腎障害・低K血症に注意" },
+// フルシトシン
+{ name:"フルシトシン", brand:"アンコチル錠", category:"抗真菌薬",
+normal:"25mg/kgを1日4回",
+ranges:[
+{ccr:[40,Infinity], dose:"通常用量"},
+{ccr:[20,40], dose:"減量"},
+{ccr:[0,20], dose:"大幅減量"}
+],
+hd:"HD後投与", pd:"慎重投与", dialyzable:"○",
+danger:true, caution:true,
+note:"TDM推奨・骨髄抑制に注意" },
+// アニデュラファンギン
+{ name:"アニデュラファンギン", brand:"エラクシス点滴静注", category:"抗真菌薬",
+normal:"初日200mg、その後100mgを1日1回",
+ranges:[
+{ccr:[0,Infinity], dose:"通常用量"}
+],
+hd:"通常用量", pd:"通常用量", dialyzable:"×",
+caution:true,
+note:"腎機能による調節不要" },
+// バラシクロビル
+{ name:"バラシクロビル", brand:"バルトレックス錠・顆粒", category:"抗ウイルス薬",
+  normal:"①帯状疱疹：1回1,000mgを1日3回  ②単純疱疹：1回500mgを1日2回",
+  ranges:[
+    {ccr:[50,Infinity], dose:"①1回1,000mgを12時間毎  ②1回500mgを12時間毎"},
+    {ccr:[30,50], dose:"①1回1,000mgを24時間毎  ②1回500mgを24時間毎"},
+    {ccr:[10,30], dose:"①②1回500mgを24時間毎"}
+  ], hd:"①1回体重55kg以上800mg・40〜55kg600mg・40kg未満400mg、HDはHD後  ②③1回200mgを1日1〜2回",
+  pd:"同左", dialyzable:"○", caution:true ,
+  note:"腎機能低下患者に減量しなかった場合、精神神経障害・意識障害の危険性が高い。安全面から他剤を優先" },
+// アシクロビル
+{ name:"アシクロビル（注射）", brand:"ゾビラックス点滴静注用", category:"抗ウイルス薬",
+  normal:"1回5mg/kgを8時間毎に1時間以上かけて点滴（脳炎・髄膜炎は1回10mg/kgまで）",
+  ranges:[
+    {ccr:[50,Infinity], dose:"通常用量"},
+    {ccr:[25,50], dose:"1回5mg/kgを12時間毎"},
+    {ccr:[10,25], dose:"1回5mg/kgを24時間毎"},
+    {ccr:[0,10], dose:"1回2.5mg/kgを24時間毎"}
+  ], hd:"1回2.5mg/kgを24時間毎、HDはHD後", pd:"同左", dialyzable:"○", caution:true },
+// ファムシクロビル
+{ name:"ファムシクロビル", brand:"ファムビル錠", category:"抗ウイルス薬",
+normal:"250〜500mg",
+ranges:[
+{ccr:[60,Infinity], dose:"通常用量"},
+{ccr:[40,60], dose:"減量"},
+{ccr:[20,40], dose:"さらに減量"},
+{ccr:[0,20], dose:"大幅減量"}
+],
+hd:"HD後投与", pd:"減量", dialyzable:"○",
+caution:true,
+note:"腎機能に応じて減量" },
+// ガンシクロビル
+{ name:"ガンシクロビル", brand:"デノシン点滴静注用", category:"抗ウイルス薬",
+normal:"5mg/kgを12時間毎",
+ranges:[
+{ccr:[70,Infinity], dose:"通常用量"},
+{ccr:[50,70], dose:"2.5mg/kgを12時間毎"},
+{ccr:[25,50], dose:"2.5mg/kgを24時間毎"},
+{ccr:[10,25], dose:"1.25mg/kgを24時間毎"},
+{ccr:[0,10], dose:"大幅減量"}
+],
+hd:"HD後投与", pd:"慎重投与", dialyzable:"○",
+danger:true, caution:true,
+note:"骨髄抑制・腎機能に応じ減量必須" },
+// バルガンシクロビル
+{ name:"バルガンシクロビル", brand:"バリキサ錠", category:"抗ウイルス薬",
+normal:"900mgを1日2回",
+ranges:[
+{ccr:[60,Infinity], dose:"通常用量"},
+{ccr:[40,60], dose:"450mgを1日2回"},
+{ccr:[25,40], dose:"450mgを1日1回"},
+{ccr:[10,25], dose:"450mg隔日"},
+{ccr:[0,10], dose:"原則使用しない"}
+],
+hd:"原則使用しない", pd:"慎重投与", dialyzable:"△" },
+// ホスカルネット
+{ name:"ホスカルネット", brand:"ホスカビル点滴静注", category:"抗ウイルス薬",
+normal:"感染症により調節",
+ranges:[
+{ccr:[60,Infinity], dose:"通常用量"},
+{ccr:[0,60], dose:"腎機能に応じ大幅減量"}
+],
+hd:"慎重投与", pd:"慎重投与", dialyzable:"△",
+danger:true, caution:true,
+note:"腎毒性・低Ca血症に注意" },
+// シドフォビル
+{ name:"シドフォビル", brand:"ビスタイド注", category:"抗ウイルス薬",
+normal:"適応により投与",
+ranges:[
+{ccr:[55,Infinity], dose:"通常用量"},
+{ccr:[0,55], dose:"禁忌"}
+],
+hd:"禁忌", pd:"禁忌", dialyzable:"×",
+danger:true,
+note:"強い腎毒性あり" },
+// オセルタミビル
+{ name:"オセルタミビル", brand:"タミフルカプセル・ドライシロップ", category:"抗インフルエンザ薬",
+  normal:"治療：1回75mgを1日2回（5日間）  予防：1回75mgを1日1回（7〜10日間）",
+  ranges:[
+    {ccr:[30,Infinity], dose:"通常用量"},
+    {ccr:[10,30], dose:"治療：1日1回75mg（5日間）  予防：1回75mgを隔日（4〜5回）"}
+  ], hd:"治療：1回75mgを単回  予防：初回75mg、2回のHD後に75mg追加",
+  pd:"初回75mg、7日目に75mg追加", dialyzable:"○", caution:true },
+// エンテカビル
+{ name:"エンテカビル", brand:"バラクルード錠", category:"B型肝炎治療薬",
+normal:"0.5mg 1日1回",
+ranges:[
+{ccr:[50,Infinity], dose:"通常用量"},
+{ccr:[30,50], dose:"0.25mg 1日1回"},
+{ccr:[10,30], dose:"0.15mg 1日1回"},
+{ccr:[0,10], dose:"0.05mg 1日1回"}
+],
+hd:"透析後投与", pd:"慎重投与", dialyzable:"○",
+caution:true,
+note:"腎機能に応じ減量" },
+// テノホビル アラフェナミド
+{ name:"テノホビル アラフェナミド", brand:"ベムリディ錠", category:"B型肝炎治療薬",
+normal:"25mg 1日1回",
+ranges:[
+{ccr:[15,Infinity], dose:"通常用量"},
+{ccr:[0,15], dose:"慎重投与"}
+],
+hd:"通常用量", pd:"通常用量", dialyzable:"×",
+caution:true,
+note:"透析患者では透析後投与" },
 ];

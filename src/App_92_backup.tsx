@@ -1,0 +1,216 @@
+import { useState } from "react";
+import { DRUG_DB } from "./data/drugs";
+
+const CATEGORIES = ["すべて", ...Array.from(new Set(DRUG_DB.map(d => d.category)))];
+
+function getRecommendation(drug, ccr) {
+  if (ccr === null) return null;
+  const sorted = [...drug.ranges].sort((a,b) => b.ccr[0] - a.ccr[0]);
+  for (const r of sorted) {
+    if (ccr >= r.ccr[0]) return r;
+  }
+  return sorted[sorted.length - 1];
+}
+
+function getStatusLabel(drug, ccr) {
+  if (ccr === null) return null;
+  if (drug.danger) {
+    const rec = getRecommendation(drug, ccr);
+    if (rec && (rec.dose.includes("禁忌") || rec.dose.includes("推奨されない"))) return "danger";
+    return "caution";
+  }
+  if (drug.caution) {
+    const rec = getRecommendation(drug, ccr);
+    if (rec && ccr < 30) return "caution";
+    if (rec && ccr < 60) return "warn";
+    return "ok";
+  }
+  return "ok";
+}
+
+const STATUS = {
+  danger: { label:"⚠ 禁忌・要注意", bg:"#FCEBEB", text:"#791F1F", border:"#F09595" },
+  caution: { label:"⚠ 要注意", bg:"#FAEEDA", text:"#633806", border:"#FAC775" },
+  warn: { label:"△ 調整要", bg:"#FAEEDA", text:"#633806", border:"#EF9F27" },
+  ok: { label:"✓ 通常", bg:"#EAF3DE", text:"#27500A", border:"#C0DD97" },
+};
+
+export default function App() {
+  const [ccr, setCcr] = useState(60);
+  const [search, setSearch] = useState("");
+  const [cat, setCat] = useState("すべて");
+  const [expanded, setExpanded] = useState({});
+
+  const filtered = DRUG_DB.filter(d => {
+    const matchCat = cat === "すべて" || d.category === cat;
+    const q = search.toLowerCase();
+    return matchCat && (d.name.toLowerCase().includes(q) || d.brand.toLowerCase().includes(q) || d.category.toLowerCase().includes(q));
+  });
+
+  const toggle = name => setExpanded(prev => ({...prev, [name]: !prev[name]}));
+
+  const ccrColor = () => {
+    if (ccr >= 90) return { bg:"#EAF3DE", text:"#27500A", border:"#639922", stage:"G1（正常〜軽度低下）" };
+    if (ccr >= 60) return { bg:"#E6F1FB", text:"#0C447C", border:"#378ADD", stage:"G2（軽度〜中等度低下）" };
+    if (ccr >= 45) return { bg:"#FAEEDA", text:"#633806", border:"#EF9F27", stage:"G3a（中等度〜高度低下）" };
+    if (ccr >= 30) return { bg:"#FAEEDA", text:"#633806", border:"#BA7517", stage:"G3b（中等度〜高度低下）" };
+    if (ccr >= 15) return { bg:"#FAECE7", text:"#712B13", border:"#D85A30", stage:"G4（高度低下）" };
+    return { bg:"#FCEBEB", text:"#791F1F", border:"#E24B4A", stage:"G5（末期腎不全）" };
+  };
+  const cc = ccrColor();
+
+  return (
+    <div style={{ fontFamily:"var(--font-sans)", padding:"1rem 0", color:"var(--color-text-primary)" }}>
+      <h2 style={{ fontSize:18, fontWeight:500, margin:"0 0 4px" }}>eGFR/CCr対応 薬剤投与量一覧</h2>
+      <p style={{ fontSize:12, color:"var(--color-text-secondary)", margin:"0 0 1.25rem" }}>
+        腎機能低下時に最も注意の必要な薬剤投与量一覧 2026年改訂 39版 に準拠
+      </p>
+
+      {/* CCr入力 */}
+      <div style={{ background:"var(--color-background-secondary)", borderRadius:12, padding:"1rem 1.25rem", marginBottom:"1.25rem" }}>
+        <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", marginBottom:6 }}>
+          <label style={{ fontSize:14, color:"var(--color-text-secondary)" }}>GFRまたはCCr（mL/min）</label>
+          <span style={{ fontSize:24, fontWeight:500, color:cc.text }}>{ccr}</span>
+        </div>
+        <input type="range" min="1" max="120" step="1" value={ccr}
+          onChange={e => setCcr(Number(e.target.value))} style={{ width:"100%", marginBottom:10 }} />
+        <div style={{ display:"flex", justifyContent:"space-between", marginBottom:10 }}>
+          {["<15","15","30","45","60","90"].map((l,i) => (
+            <span key={i} style={{ fontSize:10, color:"var(--color-text-tertiary)" }}>{l}</span>
+          ))}
+        </div>
+        <div style={{ display:"inline-flex", alignItems:"center", gap:8,
+          background:cc.bg, border:`1px solid ${cc.border}`, borderRadius:8, padding:"4px 14px" }}>
+          <span style={{ fontSize:13, fontWeight:500, color:cc.text }}>{cc.stage}</span>
+        </div>
+      </div>
+
+      {/* 検索・カテゴリ */}
+      <div style={{ display:"flex", gap:8, marginBottom:"1rem", flexWrap:"wrap" }}>
+        <input type="text" placeholder="薬剤名・商品名・カテゴリで検索..."
+          value={search} onChange={e => setSearch(e.target.value)}
+          style={{ flex:"1 1 160px", minWidth:0, fontSize:14, padding:"6px 10px",
+            border:"0.5px solid var(--color-border-secondary)", borderRadius:8,
+            background:"var(--color-background-primary)", color:"var(--color-text-primary)" }} />
+        <select value={cat} onChange={e => setCat(e.target.value)}
+          style={{ fontSize:13, padding:"6px 10px", border:"0.5px solid var(--color-border-secondary)",
+            borderRadius:8, background:"var(--color-background-primary)", color:"var(--color-text-primary)" }}>
+          {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
+        </select>
+      </div>
+      <p style={{ fontSize:12, color:"var(--color-text-secondary)", margin:"0 0 0.75rem" }}>
+        {filtered.length}件表示 / 全{DRUG_DB.length}件 ▼ 各カードをタップで詳細表示
+      </p>
+
+      {/* 薬剤一覧 */}
+      <div style={{ display:"flex", flexDirection:"column", gap:8 }}>
+        {filtered.map(drug => {
+          const rec = getRecommendation(drug, ccr);
+          const st = getStatusLabel(drug, ccr) || "ok";
+          const s = STATUS[st];
+          const open = expanded[drug.name];
+          return (
+            <div key={drug.name} style={{ background:"var(--color-background-primary)",
+              border:"0.5px solid var(--color-border-tertiary)", borderRadius:12, overflow:"hidden" }}>
+              <div onClick={() => toggle(drug.name)} style={{ padding:"0.9rem 1.1rem", cursor:"pointer" }}>
+                <div style={{ display:"flex", alignItems:"flex-start", justifyContent:"space-between", gap:8, flexWrap:"wrap" }}>
+                  <div>
+                    <span style={{ fontSize:15, fontWeight:500 }}>{drug.name}</span>
+                    {drug.dialyzable && (
+                      <span style={{ fontSize:10, marginLeft:6,
+                        background:"var(--color-background-secondary)",
+                        color:"var(--color-text-secondary)",
+                        border:"0.5px solid var(--color-border-tertiary)",
+                        borderRadius:4, padding:"1px 6px" }}>透析性:{drug.dialyzable}</span>
+                    )}
+                    <div style={{ fontSize:11, color:"var(--color-text-secondary)", marginTop:2 }}>{drug.category}</div>
+                  </div>
+                  <span style={{ fontSize:11, fontWeight:500,
+                    background:s.bg, color:s.text, border:`1px solid ${s.border}`,
+                    borderRadius:6, padding:"3px 10px", whiteSpace:"nowrap", flexShrink:0 }}>
+                    {s.label}
+                  </span>
+                </div>
+                {rec && (
+                  <div style={{ marginTop:8, background:s.bg, border:`0.5px solid ${s.border}`,
+                    borderRadius:8, padding:"7px 10px" }}>
+                    <p style={{ fontSize:13, fontWeight:500, color:s.text, margin:"0 0 2px" }}>
+                      CCr {rec.ccr[1] === Infinity ? `≥${rec.ccr[0]}` : `${rec.ccr[0]}〜${rec.ccr[1]}`} mL/min
+                    </p>
+                    <p style={{ fontSize:12, color:s.text, margin:0 }}>{rec.dose}</p>
+                  </div>
+                )}
+                <div style={{ fontSize:11, color:"var(--color-text-tertiary)", marginTop:6, textAlign:"right" }}>
+                  {open ? "▲ 閉じる" : "▼ 詳細・全区分・透析"}
+                </div>
+              </div>
+
+              {open && (
+                <div style={{ borderTop:"0.5px solid var(--color-border-tertiary)", padding:"0.9rem 1.1rem", fontSize:12 }}>
+                  <div style={{ marginBottom:10 }}>
+                    <p style={{ fontWeight:500, color:"var(--color-text-secondary)", margin:"0 0 4px" }}>商品名</p>
+                    <p style={{ margin:0 }}>{drug.brand}</p>
+                  </div>
+                  <div style={{ marginBottom:10 }}>
+                    <p style={{ fontWeight:500, color:"var(--color-text-secondary)", margin:"0 0 4px" }}>通常用量</p>
+                    <p style={{ margin:0 }}>{drug.normal}</p>
+                  </div>
+                  <div style={{ marginBottom:10 }}>
+                    <p style={{ fontWeight:500, color:"var(--color-text-secondary)", margin:"0 0 6px" }}>腎機能別投与量</p>
+                    <table style={{ width:"100%", borderCollapse:"collapse" }}>
+                      <thead>
+                        <tr style={{ background:"var(--color-background-secondary)" }}>
+                          <th style={{ padding:"4px 8px", textAlign:"left", borderRadius:"4px 0 0 0", fontSize:11, fontWeight:500 }}>CCr (mL/min)</th>
+                          <th style={{ padding:"4px 8px", textAlign:"left", borderRadius:"0 4px 0 0", fontSize:11, fontWeight:500 }}>投与法</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {[...drug.ranges].sort((a,b) => b.ccr[0] - a.ccr[0]).map((r, i) => {
+                          const isActive = ccr >= r.ccr[0] && (r === getRecommendation(drug, ccr));
+                          return (
+                            <tr key={i} style={{ background: isActive ? s.bg : "transparent",
+                              borderTop:"0.5px solid var(--color-border-tertiary)" }}>
+                              <td style={{ padding:"5px 8px", fontSize:11, color: isActive ? s.text : "var(--color-text-secondary)", whiteSpace:"nowrap", fontWeight: isActive ? 500 : 400 }}>
+                                {r.ccr[1] === Infinity ? `≥${r.ccr[0]}` : `${r.ccr[0]}〜${r.ccr[1]}`}
+                              </td>
+                              <td style={{ padding:"5px 8px", fontSize:11, color: isActive ? s.text : "var(--color-text-primary)" }}>
+                                {isActive && <span style={{ fontWeight:600 }}>▶ </span>}{r.dose}
+                              </td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
+                  <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:8, marginBottom: drug.note ? 10 : 0 }}>
+                    <div style={{ background:"var(--color-background-secondary)", borderRadius:8, padding:"7px 10px" }}>
+                      <p style={{ fontWeight:500, color:"var(--color-text-secondary)", margin:"0 0 3px", fontSize:11 }}>HD（血液透析）</p>
+                      <p style={{ margin:0, fontSize:13, fontWeight:600 }}>{drug.hd}</p>
+                    </div>
+                    <div style={{ background:"var(--color-background-secondary)", borderRadius:8, padding:"7px 10px" }}>
+                      <p style={{ fontWeight:500, color:"var(--color-text-secondary)", margin:"0 0 3px", fontSize:11 }}>PD（腹膜透析）</p>
+                      <p style={{ margin:0, fontSize:11 }}>{drug.pd}</p>
+                    </div>
+                  </div>
+                  {drug.note && (
+                    <div style={{ background:"#FAEEDA", border:"0.5px solid #FAC775",
+                      borderRadius:8, padding:"7px 10px", marginTop:8 }}>
+                      <p style={{ fontSize:11, color:"#633806", margin:0 }}>⚠ 注記：{drug.note}</p>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+
+      <div style={{ marginTop:"1.5rem", background:"var(--color-background-secondary)",
+        border:"0.5px solid var(--color-border-tertiary)", borderRadius:8, padding:"10px 14px" }}>
+        <p style={{ fontSize:11, color:"var(--color-text-secondary)", margin:0 }}>
+          ⚠ 本ツールは「腎機能低下時に最も注意の必要な薬剤投与量一覧 2026年改訂 39版」（日本腎臓学会）を参考に作成した参考情報です。本一覧は情報が限られているものを含みます。実際の投与判断は必ず担当医師・薬剤師が行い、最新の添付文書・ガイドラインを確認してください。
+        </p>
+      </div>
+    </div>
+  );
+}
